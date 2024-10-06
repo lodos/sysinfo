@@ -1,0 +1,10 @@
+[package]
+name = "system_info"  # Имя вашего пакета
+version = "0.1.0"      # Версия вашего пакета
+edition = "2021"       # Версия Rust
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+sysinfo = "0.27"  # Проверьте последнюю доступную версию
+warp = "0.3"
+tokio = { version = "1", features = ["full"] }

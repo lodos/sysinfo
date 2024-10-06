@@ -1,0 +1,10 @@
+/Users/lodos/GIT/MVP/RustFirst/target/debug/deps/libderive_more-618de2211eea86c6.dylib: /Users/lodos/.cargo/registry/src/index.crates.io-6f17d22bba15001f/derive_more-0.99.18/src/lib.rs /Users/lodos/.cargo/registry/src/index.crates.io-6f17d22bba15001f/derive_more-0.99.18/src/syn_compat.rs /Users/lodos/.cargo/registry/src/index.crates.io-6f17d22bba15001f/derive_more-0.99.18/src/utils.rs /Users/lodos/.cargo/registry/src/index.crates.io-6f17d22bba15001f/derive_more-0.99.18/src/add_helpers.rs /Users/lodos/.cargo/registry/src/index.crates.io-6f17d22bba15001f/derive_more-0.99.18/src/add_like.rs /Users/lodos/.cargo/registry/src/index.crates.io-6f17d22bba15001f/derive_more-0.99.18/src/sum_like.rs
+
+/Users/lodos/GIT/MVP/RustFirst/target/debug/deps/derive_more-618de2211eea86c6.d: /Users/lodos/.cargo/registry/src/index.crates.io-6f17d22bba15001f/derive_more-0.99.18/src/lib.rs /Users/lodos/.cargo/registry/src/index.crates.io-6f17d22bba15001f/derive_more-0.99.18/src/syn_compat.rs /Users/lodos/.cargo/registry/src/index.crates.io-6f17d22bba15001f/derive_more-0.99.18/src/utils.rs /Users/lodos/.cargo/registry/src/index.crates.io-6f17d22bba15001f/derive_more-0.99.18/src/add_helpers.rs /Users/lodos/.cargo/registry/src/index.crates.io-6f17d22bba15001f/derive_more-0.99.18/src/add_like.rs /Users/lodos/.cargo/registry/src/index.crates.io-6f17d22bba15001f/derive_more-0.99.18/src/sum_like.rs
+
+/Users/lodos/.cargo/registry/src/index.crates.io-6f17d22bba15001f/derive_more-0.99.18/src/lib.rs:
+/Users/lodos/.cargo/registry/src/index.crates.io-6f17d22bba15001f/derive_more-0.99.18/src/syn_compat.rs:
+/Users/lodos/.cargo/registry/src/index.crates.io-6f17d22bba15001f/derive_more-0.99.18/src/utils.rs:
+/Users/lodos/.cargo/registry/src/index.crates.io-6f17d22bba15001f/derive_more-0.99.18/src/add_helpers.rs:
+/Users/lodos/.cargo/registry/src/index.crates.io-6f17d22bba15001f/derive_more-0.99.18/src/add_like.rs:
+/Users/lodos/.cargo/registry/src/index.crates.io-6f17d22bba15001f/derive_more-0.99.18/src/sum_like.rs:

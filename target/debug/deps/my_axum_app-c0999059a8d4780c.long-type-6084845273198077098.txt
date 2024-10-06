@@ -1,0 +1,1 @@
+warp::Server<warp::filter::and_then::AndThen<warp::filter::and::And<Exact<warp::path::internal::Opaque<&str>>, impl warp::Filter + warp::filter::FilterBase<Extract = (), Error = Rejection> + Copy>, fn() -> impl Future<Output = impl Reply> {start_progress_bar}>>

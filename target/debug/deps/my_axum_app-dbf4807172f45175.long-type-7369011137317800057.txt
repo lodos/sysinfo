@@ -1,0 +1,1 @@
+warp::filter::and_then::AndThen<impl warp::Filter + warp::filter::FilterBase<Extract = (), Error = Rejection> + Copy, {closure@src/main.rs:16:19: 16:26}>
