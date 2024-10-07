@@ -25,7 +25,6 @@ struct CpuDetails {
     id: usize,       // Номер процессора
     name: String,    // Название процессора
     frequency: u64,  // Частота процессора
-    uid: Option<u32>, // UID устройства
 }
 
 #[derive(Serialize)]
@@ -40,9 +39,12 @@ struct DisplayDetails {
 
 #[derive(Serialize)]
 struct ProcessDetails {
-    pid: u32,            // Идентификатор процесса
-    name: String,        // Название процесса
-    status: String,      // Статус процесса
+    pid: u32,               // Идентификатор процесса
+    name: String,           // Название процесса
+    status: String,         // Статус процесса
+    memory: String,         // Используемая память процессом в МБ
+    cpu_usage: String,      // Использование процессора процессом в процентах
+    uptime: String,         // Время работы процесса
 }
 
 #[derive(Serialize)]
@@ -131,6 +133,23 @@ fn get_display_info() -> Vec<DisplayDetails> {
     vec![parse_display_info(output_str)]
 }
 
+fn format_uptime(seconds: u64) -> String {
+    let years = seconds / (365 * 24 * 60 * 60);
+    let remainder = seconds % (365 * 24 * 60 * 60);
+    let months = remainder / (30 * 24 * 60 * 60);
+    let remainder = remainder % (30 * 24 * 60 * 60);
+    let days = remainder / (24 * 60 * 60);
+    let remainder = remainder % (24 * 60 * 60);
+    let hours = remainder / (60 * 60);
+    let remainder = remainder % (60 * 60);
+    let minutes = remainder / 60;
+    let seconds = remainder % 60;
+
+    format!(
+        "{} г. {} мес. {} д. {:02} ч. {:02} м. {:02} с.",
+        years, months, days, hours, minutes, seconds
+    )
+}
 #[tokio::main]
 async fn main() {
     // Определяем маршрут для возврата системной информации в формате JSON
@@ -163,7 +182,6 @@ async fn main() {
                     id, // Номер процессора
                     name: cpu.brand().to_string(), // Название процессора
                     frequency: cpu.frequency(), // Частота процессора
-                    uid: None, // UID устройства (можно добавить логику для получения UID, если требуется)
                 }
             }).collect();
 
@@ -179,6 +197,9 @@ async fn main() {
                     pid: pid.as_u32(), // Преобразуем Pid в u32
                     name: process.name().to_string(), // Название процесса
                     status: format!("{:?}", process.status()), // Статус процесса
+                    memory: format!("{:.2} МБ", process.memory() as f64 / (1024.0 * 1024.0)), // Используемая память процессом в МБ
+                    cpu_usage: format!("{:.2}%", process.cpu_usage()), // Использование CPU в процентах
+                    uptime: format_uptime(process.run_time()), // Время работы процесса в формате Г.Мес.Д Ч.М.С
                 }
             }).collect();
 
