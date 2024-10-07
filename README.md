@@ -1,5 +1,8 @@
 # Completely very fast RUST syysinfo project (faster than GO similar project 12 times)
-## Mac OS X m1
+
+Version for Mac OS X m1 only
+
+## Run from source
 
 ```shell
 cd /path/to/project
@@ -7,13 +10,40 @@ cargo run
 ```
 
 Go to browser and you'll see completely json with system info
+
 ```shell
 http://127.0.0.1:8989/system_info
 ```
 
+## Run compiled release
+
+```shell
+cargo build
+```
+
+or
+
+```shell
+cargo build --release
+```
+
+Then, start the complied app
+
+```shell
+cargo run
+```
+
+or
+
+```shell
+cargo run --release
+```
+
 <details>
 <summary>Example output</summary>
+
 ```json
+
 {
   "memory": {
     "total": 32768,
@@ -4505,4 +4535,5 @@ http://127.0.0.1:8989/system_info
   "execution_time": "1.19"
 }
 ```
+
 </details>

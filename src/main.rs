@@ -8,16 +8,16 @@ use std::collections::HashMap;
 
 #[derive(Serialize)]
 struct MemoryInfo {
-    total: f64,     // Общая память в ГБ
-    used: f64,      // Используемая память в ГБ
-    available: f64, // Доступная память в ГБ
+    total: String,     // Общая память в МБ
+    used: String,      // Используемая память в МБ
+    available: String, // Доступная память в МБ
 }
 
 #[derive(Serialize)]
 struct DiskDetails {
     name: String,
-    total_space: f64, // Общий объем диска в ГБ
-    used_space: f64,  // Используемый объем диска в ГБ
+    total_space: String, // Общий объем диска в МБ
+    used_space: String,  // Используемый объем диска в МБ
 }
 
 #[derive(Serialize)]
@@ -25,6 +25,7 @@ struct CpuDetails {
     id: usize,       // Номер процессора
     name: String,    // Название процессора
     frequency: u64,  // Частота процессора
+    uid: Option<u32>, // UID устройства
 }
 
 #[derive(Serialize)]
@@ -142,26 +143,27 @@ async fn main() {
 
             // Собираем информацию о памяти
             let memory_info = MemoryInfo {
-                total: system.total_memory() as f64 / (1024.0 * 1024.0),
-                used: system.used_memory() as f64 / (1024.0 * 1024.0),
-                available: system.free_memory() as f64 / (1024.0 * 1024.0),
+                total: format!("{:.2} МБ", system.total_memory() as f64 / (1024.0 * 1024.0)), // Общая память в МБ
+                used: format!("{:.2} МБ", system.used_memory() as f64 / (1024.0 * 1024.0)), // Используемая память в МБ
+                available: format!("{:.2} МБ", system.free_memory() as f64 / (1024.0 * 1024.0)), // Доступная память в МБ
             };
 
             // Собираем информацию о дисках
             let disks_info: Vec<DiskDetails> = system.disks().iter().map(|disk| {
                 DiskDetails {
                     name: disk.name().to_string_lossy().into_owned(),
-                    total_space: disk.total_space() as f64 / (1024.0 * 1024.0),
-                    used_space: (disk.total_space() - disk.available_space()) as f64 / (1024.0 * 1024.0),
+                    total_space: format!("{:.2} МБ", disk.total_space() as f64 / (1024.0 * 1024.0)), // Общий объем диска в МБ
+                    used_space: format!("{:.2} МБ", (disk.total_space() - disk.available_space()) as f64 / (1024.0 * 1024.0)), // Используемый объем диска в МБ
                 }
             }).collect();
 
             // Собираем информацию о процессорах
             let cpu_info: Vec<CpuDetails> = system.cpus().iter().enumerate().map(|(id, cpu)| {
                 CpuDetails {
-                    id,
-                    name: cpu.brand().to_string(),
-                    frequency: cpu.frequency(),
+                    id, // Номер процессора
+                    name: cpu.brand().to_string(), // Название процессора
+                    frequency: cpu.frequency(), // Частота процессора
+                    uid: None, // UID устройства (можно добавить логику для получения UID, если требуется)
                 }
             }).collect();
 
@@ -175,13 +177,13 @@ async fn main() {
             let processes_info: Vec<ProcessDetails> = system.processes().iter().map(|(&pid, process)| {
                 ProcessDetails {
                     pid: pid.as_u32(), // Преобразуем Pid в u32
-                    name: process.name().to_string(),
-                    status: format!("{:?}", process.status()),
+                    name: process.name().to_string(), // Название процесса
+                    status: format!("{:?}", process.status()), // Статус процесса
                 }
             }).collect();
 
             // Заканчиваем замер времени
-            let execution_time = format!("{:.2}", start_time.elapsed().as_secs_f64());
+            let execution_time = format!("{:.2} секунд", start_time.elapsed().as_secs_f64());
 
             // Создаем объект SystemInfo
             let system_info = SystemInfo {
