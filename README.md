@@ -55,11 +55,6 @@ cargo run --release
       "name": "Macintosh HD",
       "total_space": "948584.16 МБ",
       "used_space": "743076.75 МБ"
-    },
-    {
-      "name": "Macintosh HD",
-      "total_space": "948584.16 МБ",
-      "used_space": "743076.75 МБ"
     }
   ],
   "cpu": [
